@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "version": "1.1.2",
+    "ios_buy": true,
+    "ios_swap": true,
+    "ios_browser": true,
+    "android_buy": true,
+    "android_swap": true,
+    "android_browser": true
+  }
+]
