@@ -257,7 +257,7 @@ const cacheConfigs = [
                     });
                     let dataConfig = {
                         address: true,
-                        sell: true,
+                        send: true,
                         buy: []
                     };
                     const filename = isProduction ? 'config.json' : 'preview.json';
