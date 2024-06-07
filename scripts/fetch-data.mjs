@@ -252,9 +252,10 @@ const cacheConfigs = [
         additionalProcess: [
             async (data, preview_data, config, lang, isProduction) => {
                 if (preview_data.length > 0 || data.length > 0) {
-                    const dataSave = preview_data.map((item) => {
+                    const _data = isProduction ? data : preview_data;
+                    const dataSave = _data.map((item) => {
                         return item.version;
-                    });
+                    }).sort((a, b) => a - b);
                     let dataConfig = {
                         address: true,
                         send: true,
