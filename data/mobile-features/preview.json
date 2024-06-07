@@ -3,7 +3,7 @@
     "version": "1.1.2",
     "ios_buy": true,
     "ios_swap": true,
-    "ios_browser": true,
+    "ios_browser": false,
     "android_buy": true,
     "android_swap": true,
     "android_browser": true
@@ -11,6 +11,33 @@
   {
     "version": "1.1.3",
     "ios_buy": false,
+    "ios_swap": true,
+    "ios_browser": true,
+    "android_buy": true,
+    "android_swap": true,
+    "android_browser": true
+  },
+  {
+    "version": "1.1.4",
+    "ios_buy": true,
+    "ios_swap": true,
+    "ios_browser": true,
+    "android_buy": true,
+    "android_swap": true,
+    "android_browser": true
+  },
+  {
+    "version": "1.1.5",
+    "ios_buy": true,
+    "ios_swap": true,
+    "ios_browser": true,
+    "android_buy": true,
+    "android_swap": true,
+    "android_browser": true
+  },
+  {
+    "version": "1.4.5",
+    "ios_buy": true,
     "ios_swap": true,
     "ios_browser": true,
     "android_buy": true,
