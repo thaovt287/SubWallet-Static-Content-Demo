@@ -259,7 +259,7 @@ const cacheConfigs = [
                 if (_data.length > 0) {
                     const dataSave = _data.map((item) => {
                         return item.version;
-                    }).sort((a, b) => a - b);
+                    }).sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
                     let dataConfig = {
                         address: true,
                         send: true,
