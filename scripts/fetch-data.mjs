@@ -323,9 +323,8 @@ export async function downloadFile(url, downloadDir, forceFileName = null) {
 const downloadedFiles = {};
 
 const fetchAndProcessData = async (url, folder, downloadDir, fieldsImage) => {
-    console.log(url)
     const results = await axios.get(url);
-    // console.log(results)
+
     if (!results.data) return;
 
     return await Promise.all(results.data.map(async item => {
@@ -383,8 +382,6 @@ const main = async () => {
         }
 
         for (const lang of langs) {
-            ;
-
             const dataContent = await fetchAndProcessData(getUrl(config.url, false, lang), folder, downloadDir, fieldsImage);
             const previewData = await fetchAndProcessData(getUrl(config.url, true, lang), folder, downloadDir, fieldsImage);
 
@@ -404,12 +401,12 @@ const main = async () => {
                     }
                 }
             }
-            if (config.fileName && isProduction) {
+            if (config.fileName && isProduction && dataContent) {
                 const path = savePath(folder, getFileNameByLang(config.fileName, lang));
                 await writeJSONFile(path, dataContent);
             }
-            if (config.fileName && previewData) {
-                const previewPath = config.preview && savePath(folder, getFileNameByLang(config.preview, lang))
+            if (config.preview && previewData) {
+                const previewPath = savePath(folder, getFileNameByLang(config.preview, lang))
                 await writeJSONFile(previewPath, previewData);
             }
 
