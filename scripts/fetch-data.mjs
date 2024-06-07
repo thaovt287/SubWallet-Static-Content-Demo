@@ -319,8 +319,9 @@ export async function downloadFile(url, downloadDir, forceFileName = null) {
 const downloadedFiles = {};
 
 const fetchAndProcessData = async (url, folder, downloadDir, fieldsImage) => {
+    console.log(url)
     const results = await axios.get(url);
-
+    console.log(results)
     if (!results.data) return;
 
     return await Promise.all(results.data.map(async item => {
