@@ -321,7 +321,7 @@ const downloadedFiles = {};
 const fetchAndProcessData = async (url, folder, downloadDir, fieldsImage) => {
     console.log(url)
     const results = await axios.get(url);
-    console.log(results)
+    // console.log(results)
     if (!results.data) return;
 
     return await Promise.all(results.data.map(async item => {
