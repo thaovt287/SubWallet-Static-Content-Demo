@@ -245,10 +245,10 @@ const cacheConfigs = [
     {
         url: `${STRAPI_URL}/api/list/buy-button`,
         folder: 'buy-buttons',
-        fileName: 'list.json',
+        fileName: '',
         imageFields: [],
         removeFields: ['id'],
-        preview: 'preview.json',
+        preview: '',
         additionalProcess: [
             async (data, preview_data, config, lang, isProduction) => {
                 if (preview_data.length > 0 || data.length > 0) {
@@ -377,9 +377,7 @@ const main = async () => {
             langs.push(...config.langs)
         }
 
-        for (const lang of langs) {
-            const path = savePath(folder, getFileNameByLang(config.fileName, lang));
-            const previewPath = config.preview && savePath(folder, getFileNameByLang(config.preview, lang));
+        for (const lang of langs) {;
 
             const dataContent = await fetchAndProcessData(getUrl(config.url, false, lang), folder, downloadDir, fieldsImage);
             const previewData = config.preview && (await fetchAndProcessData(getUrl(config.url, true, lang), folder, downloadDir, fieldsImage));
@@ -400,9 +398,15 @@ const main = async () => {
                     }
                 }
             }
+            if(config.fileName && isProduction){
+                const path = savePath(folder, getFileNameByLang(config.fileName, lang));
+                await writeJSONFile(path, dataContent);
+            }
+            if(config.fileName && previewData){
+                const previewPath = config.preview && savePath(folder, getFileNameByLang(config.preview, lang))
+                await writeJSONFile(previewPath, previewData);
+            }
 
-            isProduction && await writeJSONFile(path, dataContent);
-            previewData && await writeJSONFile(previewPath, previewData);
         }
     }
 }
