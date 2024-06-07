@@ -287,6 +287,15 @@ const cacheConfigs = [
         preview: 'preview.json',
         additionalProcess: []
     },
+    {
+        url: `${STRAPI_URL}/api/list/mobile-feature`,
+        folder: 'mobile-features',
+        fileName: 'list.json',
+        imageFields: [],
+        removeFields: ['id'],
+        preview: 'preview.json',
+        additionalProcess: []
+    },
 ]
 
 const savePath = (folder, fileName) => `data/${folder}/${fileName || 'list.json'}`;
