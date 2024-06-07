@@ -381,7 +381,7 @@ const main = async () => {
         for (const lang of langs) {;
 
             const dataContent = await fetchAndProcessData(getUrl(config.url, false, lang), folder, downloadDir, fieldsImage);
-            const previewData = config.preview && (await fetchAndProcessData(getUrl(config.url, true, lang), folder, downloadDir, fieldsImage));
+            const previewData = await fetchAndProcessData(getUrl(config.url, true, lang), folder, downloadDir, fieldsImage);
 
             if (config.additionalProcess) {
                 for (const process of config.additionalProcess) {
