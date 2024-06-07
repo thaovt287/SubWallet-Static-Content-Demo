@@ -260,15 +260,15 @@ const cacheConfigs = [
                         sell: true,
                         buy: []
                     };
+                    const filename = isProduction ? 'config.json' : 'preview.json';
+                    const path = savePath('tokens', filename);
                     try {
-                        const filePath = 'data/tokens/config.json';
-                        dataConfig = JSON.parse(fs.readFileSync(filePath));
+                        dataConfig = JSON.parse(fs.readFileSync(path));
                     } catch (e) {
                         console.log(e)
                     }
 
                     dataConfig.buy = dataSave;
-                    const path = savePath('tokens', `config.json`);
                     writeJSONFile(path, dataConfig).catch(console.error)
                 }
             }
