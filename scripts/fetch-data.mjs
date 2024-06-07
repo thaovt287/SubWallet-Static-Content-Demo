@@ -250,9 +250,13 @@ const cacheConfigs = [
         removeFields: ['id'],
         preview: '',
         additionalProcess: [
-            async (data, preview_data, config, lang, isProduction) => {
-                if (preview_data.length > 0 || data.length > 0) {
-                    const _data = isProduction ? data : preview_data;
+            async (data, previewData, config, lang, isProduction) => {
+                const {data: _data, fileName} = isProduction ? {
+                    data: data,
+                    fileName: "config.json"
+                } : {data: previewData, fileName: "preview.json"};
+
+                if (_data.length > 0) {
                     const dataSave = _data.map((item) => {
                         return item.version;
                     }).sort((a, b) => a - b);
@@ -261,8 +265,7 @@ const cacheConfigs = [
                         send: true,
                         buy: []
                     };
-                    const filename = isProduction ? 'config.json' : 'preview.json';
-                    const path = savePath('tokens', filename);
+                    const path = savePath('tokens', fileName);
                     try {
                         dataConfig = JSON.parse(fs.readFileSync(path));
                     } catch (e) {
@@ -379,7 +382,8 @@ const main = async () => {
             langs.push(...config.langs)
         }
 
-        for (const lang of langs) {;
+        for (const lang of langs) {
+            ;
 
             const dataContent = await fetchAndProcessData(getUrl(config.url, false, lang), folder, downloadDir, fieldsImage);
             const previewData = await fetchAndProcessData(getUrl(config.url, true, lang), folder, downloadDir, fieldsImage);
@@ -400,11 +404,11 @@ const main = async () => {
                     }
                 }
             }
-            if(config.fileName && isProduction){
+            if (config.fileName && isProduction) {
                 const path = savePath(folder, getFileNameByLang(config.fileName, lang));
                 await writeJSONFile(path, dataContent);
             }
-            if(config.fileName && previewData){
+            if (config.fileName && previewData) {
                 const previewPath = config.preview && savePath(folder, getFileNameByLang(config.preview, lang))
                 await writeJSONFile(previewPath, previewData);
             }
